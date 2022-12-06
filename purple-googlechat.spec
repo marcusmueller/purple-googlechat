@@ -6,7 +6,7 @@
 
 Name: purple-%{plugin_name}
 Version: 0
-Release: 0.%{date}git%{shortcommit0}%{?dist}
+Release: 1.%{date}git%{shortcommit0}%{?dist}
 Epoch: 0
 
 License: GPLv3+
@@ -22,6 +22,9 @@ BuildRequires: pkgconfig(purple)
 
 BuildRequires: gcc
 BuildRequires: make
+
+Provides: purple-hangouts = %{?epoch:%{epoch}:}%{version}-%{release}
+Obsoletes: purple-hangouts < %{?epoch:%{epoch}:}%{version}-%{release}
 
 %package -n pidgin-%{plugin_name}
 Summary: Google Chat (Hangouts replacement) pictures, emojis andicons for Pidgin
@@ -57,5 +60,8 @@ chmod 755 %{buildroot}%{_libdir}/purple-2/lib%{plugin_name}.so
 %{_datadir}/pixmaps/pidgin/protocols/*/%{plugin_name}.png
 
 %changelog
+* Tue Dec 06 2022 Marcus Müller <marcus@hostalia.de> - 0:0-1.20221106gitb6b824a
+- Make this package supersede purple-hangouts, provide it
+
 * Tue Dec 06 2022 Marcus Müller <marcus@hostalia.de> - 0:0-0.20221106gitb6b824a
 - First SPEC version, heavily based on purple-hangouts SPEC
